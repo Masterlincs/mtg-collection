@@ -4,28 +4,19 @@ from db import add_collection_db
 import asyncio
 import json
 import aiohttp
-import time
-import flask
-
-start_time = time.time()
+from flask import Flask
 
 
-async def main():
-    set_code, card_num, count = await get_cards_from_file("cards.txt")
-    
-    Cards = []
 
+async def fetch_and_store_cards(set_codes, card_nums):
     async with aiohttp.ClientSession() as session:
         tasks = []
-        for index in range(count):
-            tasks.append(get_card_data(session, set_code[index].lower(), card_num[index]))
-            await asyncio.sleep(0.05)
-
+        for set_code, card_num in zip(set_codes, card_nums):
+            tasks.append(get_card_data(session, set_code.lower(), card_num))
         cards = await asyncio.gather(*tasks)
 
         for card in cards:
             if card is not None:  # Check if the card data is not None
-                print(card.name)
                 card_dict = {
                     'id': card.id,
                     'oracle_id': card.oracle_id,
@@ -95,5 +86,4 @@ async def main():
 
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-asyncio.run(main())
-print(time.time() - start_time)
+asyncio.run(fetch_and_store_cards())

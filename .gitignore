@@ -6,3 +6,6 @@ __pycache__/structs.cpython-310.pyc
 __pycache__/utils.cpython-310.pyc
 cards2.txt
 flask_app\venv
+__pycache__/main.cpython-310.pyc
+templates/images/logo.png
+templates/images/user.png

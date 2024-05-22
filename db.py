@@ -82,5 +82,3 @@ def add_collection_db(list_of_cards):
 
     connection.commit()
     connection.close()
-
-    print("database done")
