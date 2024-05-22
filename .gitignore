@@ -1,3 +1,6 @@
 cards.txt
 collection.db
 f
+__pycache__/db.cpython-310.pyc
+__pycache__/structs.cpython-310.pyc
+__pycache__/utils.cpython-310.pyc

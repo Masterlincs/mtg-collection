@@ -3,12 +3,13 @@ from utils import get_card_data, get_cards_from_file
 from db import add_collection_db
 import asyncio
 import json
+import aiohttp
 
 
 
 
 async def main():
-    set_code, card_num, count = get_cards_from_file("cards.txt")
+    set_code, card_num, count = await get_cards_from_file("cards.txt")
     Cards = []
 
     async with aiohttp.ClientSession() as session:

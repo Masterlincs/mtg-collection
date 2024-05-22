@@ -1,21 +1,22 @@
 import json
 import asyncio
 import aiohttp
+import aiofiles
 from structs import Card
 
 
-def get_cards_from_file(file_name):
+async def get_cards_from_file(file_name):
     code = []
     card = []
     count = 0
-    with open(file_name, 'r') as file:
-        line = file.readline().rstrip('\n')
-        while line:
-            items = line.split(',')
-            code.append(items[0])
-            card.append(items[1])
-            line = file.readline().rstrip('\n')
-            count += 1
+    async with aiofiles.open(file_name, mode='r') as file:
+        async for line in file:
+            line = line.rstrip('\n')
+            if line:
+                items = line.split(",")
+                code.append(items[0])
+                card.append(items[1])
+                count += 1
     return code, card, count
 
 
