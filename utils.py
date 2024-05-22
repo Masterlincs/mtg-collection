@@ -3,6 +3,7 @@ import asyncio
 import aiohttp
 import aiofiles
 from structs import Card
+from functools import lru_cache
 
 
 async def get_cards_from_file(file_name):
@@ -20,6 +21,9 @@ async def get_cards_from_file(file_name):
     return code, card, count
 
 
+
+
+@lru_cache(maxsize=512)
 async def get_card_data(session, set_code, card_num):
     # Define url and start request
     url = f"https://api.scryfall.com/cards/{set_code}/{card_num}"

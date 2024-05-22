@@ -4,12 +4,14 @@ from db import add_collection_db
 import asyncio
 import json
 import aiohttp
+import time
 
-
+start_time = time.time()
 
 
 async def main():
     set_code, card_num, count = await get_cards_from_file("cards.txt")
+    
     Cards = []
 
     async with aiohttp.ClientSession() as session:
@@ -93,3 +95,4 @@ async def main():
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 asyncio.run(main())
+print(time.time() - start_time)
