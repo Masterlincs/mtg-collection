@@ -15,6 +15,10 @@ from dataclasses import dataclass
 class Card:
     id: str
     oracle_id: str
+    multiverse_ids: list[int]
+    mtgo_id: int
+    mtgo_foil_id: int
+    arena_id: int
     tcgplayer_id: int
     cardmarket_id: int
     name: str
@@ -95,6 +99,10 @@ async def get_card_data(session, set_code, card_num):
             card = Card(
                 id=json_response.get("id", None),
                 oracle_id=json_response.get("oracle_id", None),
+                multiverse_ids = json_response.get("multiverse_ids", []),
+                mtgo_id = json_response.get("mtgo_id", None),
+                mtgo_foil_id = json_response.get("mtgo_foil_id", None),
+                arena_id = json_response.get("arena_id", None),
                 tcgplayer_id=json_response.get("tcgplayer_id", None),
                 cardmarket_id=json_response.get("cardmarket_id", None),
                 name=json_response.get("name", ""),
@@ -167,6 +175,10 @@ def add_collection_db(list_of_cards):
     CREATE TABLE IF NOT EXISTS cards (
         id TEXT,
         oracle_id TEXT,
+        multiverse_ids TEXT,
+        mtgo_id INTEGER,
+        mtgo_foil_id INTEGER,
+        arena_id INTEGER,
         tcgplayer_id INTEGER,
         cardmarket_id INTEGER,
         name TEXT NOT NULL,
@@ -270,6 +282,10 @@ async def main():
                 card_dict = {
                     'id': card.id,
                     'oracle_id': card.oracle_id,
+                    'multiverse_ids': json.dumps(card.multiverse_ids), 
+                    'mtgo_id': card.mtgo_id,  
+                    'mtgo_foil_id': card.mtgo_foil_id,  
+                    'arena_id': card.arena_id ,
                     'tcgplayer_id': card.tcgplayer_id,
                     'cardmarket_id': card.cardmarket_id,
                     'name': card.name,
