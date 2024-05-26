@@ -37,7 +37,7 @@ class Card:
     reprint: bool
     variation: bool
     set_id: str
-    set: str
+    set_code: str
     set_name: str
     set_type: str
     set_uri: str

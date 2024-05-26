@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
-from main import fetch_and_store_cards  # Make sure this function accepts set_codes and card_nums as arguments
+from flask_login import UserMixin
+from main import fetch_and_store_cards
 import asyncio
 
 
@@ -16,6 +17,15 @@ def fetch_and_store_cards_route():
     card_nums = data.get('card_nums', [])
     asyncio.run(fetch_and_store_cards(set_codes, card_nums))
     return jsonify({"message": "Cards fetched and stored successfully."})
+
+@app.route("/submit_registration", methods=['POST'])
+def submit_registration():
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    confirmPassword = request.form['confirmPassword']
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

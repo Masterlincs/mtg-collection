@@ -9,3 +9,4 @@ flask_app\venv
 __pycache__/main.cpython-310.pyc
 templates/images/logo.png
 templates/images/user.png
+cards1.txt

@@ -18,7 +18,7 @@ async def get_cards_from_file(file_name):
                 code.append(items[0])
                 card.append(items[1])
                 count += 1
-    return code, card, count
+    return code, card
 
 
 
@@ -66,7 +66,7 @@ async def get_card_data(session, set_code, card_num):
                 reprint=json_response.get("reprint", False),
                 variation=json_response.get("variation", False),
                 set_id=json_response.get("set_id", None),
-                set=json_response.get("set", ""),
+                set_code=json_response.get("set", ""),
                 set_name=json_response.get("set_name", ""),
                 set_type=json_response.get("set_type", ""),
                 set_uri=json_response.get("set_uri", ""),
