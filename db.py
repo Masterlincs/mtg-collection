@@ -3,6 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from structs import Card  
 from dataclasses import asdict
 import json
+import uuid
 
 # Setup SQLAlchemy
 DATABASE_URI = 'sqlite:///collection.db'
@@ -15,7 +16,8 @@ Base = declarative_base()
 
 class CardModel(Base):
     __tablename__ = 'cards'
-    id = Column(String, primary_key=True)
+    collection_id = Column(String, primary_key=True)
+    id = Column(String)
     oracle_id = Column(String)
     multiverse_ids = Column(JSON)
     mtgo_id = Column(Integer)
@@ -38,7 +40,7 @@ class CardModel(Base):
     oracle_text = Column(String)
     colors = Column(JSON)
     color_identity = Column(JSON)
-    keywords = Column(String)
+    keywords = Column(JSON)
     legalities = Column(JSON)
     games = Column(JSON)
     reserved = Column(Boolean)
@@ -86,7 +88,16 @@ def add_collection_db(list_of_cards):
     Adds a list of cards to the database.
     :param list_of_cards: List of dictionaries representing cards to be added.
     """
+
+    collection_id = str(uuid.uuid4())
+    
     for card_data in list_of_cards:
-        card_model = CardModel(**card_data)
+        
+        # Assign a new collection_id based on the index in the list plus one
+        card_model = CardModel(
+            collection_id= collection_id,
+            **card_data
+        )
+
         session.add(card_model)
     session.commit()
