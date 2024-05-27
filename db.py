@@ -4,7 +4,18 @@ from structs import Card
 from dataclasses import asdict
 import json
 import uuid
+from flask_sqlalchemy import SQLAlchemy
 
+# Create an instance of SQLAlchemy
+db = SQLAlchemy()
+
+def init_db(app):
+    """
+    Initializes the database with the Flask application.
+
+    :param app: The Flask application instance.
+    """
+    db.init_app(app)
 # Setup SQLAlchemy
 DATABASE_URI = 'sqlite:///collection.db'
 engine = create_engine(DATABASE_URI)

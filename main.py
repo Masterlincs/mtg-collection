@@ -11,8 +11,8 @@ from flask import Flask
 
 
 
-async def fetch_and_store_cards():
-    set_codes, card_nums = await get_cards_from_file("cards.txt")
+async def fetch_and_store_cards(file_path):
+    set_codes, card_nums = await get_cards_from_file(file_path)
     async with aiohttp.ClientSession() as session:
         tasks = []
         for set_code, card_num in zip(set_codes, card_nums):
@@ -29,4 +29,3 @@ async def fetch_and_store_cards():
 
 
 asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-asyncio.run(fetch_and_store_cards())

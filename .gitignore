@@ -10,3 +10,6 @@ __pycache__/main.cpython-310.pyc
 templates/images/logo.png
 templates/images/user.png
 cards1.txt
+your_database.db
+instance/users.db
+flask_secret.txt

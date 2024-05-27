@@ -38,7 +38,7 @@
                     </ul>
                 </li>
             </ul>
-            <a class="navbar ms-auto me-5" href="#">
+            <a class="navbar ms-auto me-5" href="dashboard">
                 <img class="rounded-circle" src="images/user.png" width="35px" height="35px">
              </a>
             <form class="d-flex">
@@ -48,23 +48,12 @@
         </div>
     </nav>
 
-    <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" id="username" name="username" required pattern="[a-zA-Z0-9_]{3,}" title="Username must contain only letters, numbers, and underscores. Minimum length is 3 characters.">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password" required minlength="8">
-    </div>
-    <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required minlength="8">
-    </div>
-    
+    <h2>Upload Card List</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        {{ form.file.label }} {{ form.file }}
+        {{ form.submit }}
+    </form>
  
 
 
